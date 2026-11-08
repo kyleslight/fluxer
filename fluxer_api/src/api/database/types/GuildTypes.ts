@@ -3,6 +3,7 @@
 import type {
 	ChannelID,
 	EmojiID,
+	GuildEventID,
 	GuildID,
 	InviteCode,
 	RoleID,
@@ -316,3 +317,47 @@ export interface GuildMemberByUserIdRow {
 export const GUILD_MEMBER_BY_USER_ID_COLUMNS = ['user_id', 'guild_id'] as const satisfies ReadonlyArray<
 	keyof GuildMemberByUserIdRow
 >;
+
+export interface GuildEventRow {
+	event_id: GuildEventID;
+	guild_id: GuildID;
+	channel_id: ChannelID | null;
+	creator_id: UserID;
+	name: string;
+	description: string | null;
+	scheduled_start_time: Date;
+	scheduled_end_time: Date | null;
+	status: number;
+	location: string | null;
+	created_at: Date;
+	updated_at: Date;
+	version: number;
+}
+
+export const GUILD_EVENT_COLUMNS = [
+	'event_id',
+	'guild_id',
+	'channel_id',
+	'creator_id',
+	'name',
+	'description',
+	'scheduled_start_time',
+	'scheduled_end_time',
+	'status',
+	'location',
+	'created_at',
+	'updated_at',
+	'version',
+] as const satisfies ReadonlyArray<keyof GuildEventRow>;
+
+export interface GuildEventByGuildRow {
+	guild_id: GuildID;
+	event_id: GuildEventID;
+	scheduled_start_time: Date;
+}
+
+export const GUILD_EVENTS_BY_GUILD_COLUMNS = [
+	'guild_id',
+	'event_id',
+	'scheduled_start_time',
+] as const satisfies ReadonlyArray<keyof GuildEventByGuildRow>;

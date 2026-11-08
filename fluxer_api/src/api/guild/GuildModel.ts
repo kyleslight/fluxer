@@ -12,6 +12,7 @@ import type {RequestCache} from '@app/api/middleware/RequestCacheMiddleware';
 import type {Guild} from '@app/api/models/Guild';
 import type {GuildBan} from '@app/api/models/GuildBan';
 import type {GuildEmoji} from '@app/api/models/GuildEmoji';
+import type {GuildEvent} from '@app/api/models/GuildEvent';
 import type {GuildMember} from '@app/api/models/GuildMember';
 import type {GuildRole} from '@app/api/models/GuildRole';
 import type {GuildSticker} from '@app/api/models/GuildSticker';
@@ -23,6 +24,7 @@ import type {
 	GuildStickerResponse,
 	GuildStickerWithUserResponse,
 } from '@fluxer/schema/src/domains/guild/GuildEmojiSchemas';
+import type {GuildEventResponse} from '@fluxer/schema/src/domains/guild/GuildEventSchemas';
 import type {GuildBanResponse, GuildMemberResponse} from '@fluxer/schema/src/domains/guild/GuildMemberSchemas';
 import type {GuildPartialResponse, GuildResponse} from '@fluxer/schema/src/domains/guild/GuildResponseSchemas';
 import type {GuildRoleResponse} from '@fluxer/schema/src/domains/guild/GuildRoleSchemas';
@@ -227,4 +229,21 @@ export async function mapGuildBansToResponse(
 	return bans
 		.filter((ban) => userPartials.has(ban.userId))
 		.map((ban) => mapBanWithUser(ban, userPartials.get(ban.userId)!));
+}
+
+export function mapGuildEventToResponse(event: GuildEvent): GuildEventResponse {
+	return {
+		id: event.id.toString(),
+		guild_id: event.guildId.toString(),
+		channel_id: event.channelId?.toString() ?? null,
+		creator_id: event.creatorId.toString(),
+		name: event.name,
+		description: event.description,
+		scheduled_start_time: event.scheduledStartTime.toISOString(),
+		scheduled_end_time: event.scheduledEndTime?.toISOString() ?? null,
+		status: event.status as GuildEventResponse['status'],
+		location: event.location,
+		created_at: event.createdAt.toISOString(),
+		updated_at: event.updatedAt.toISOString(),
+	};
 }

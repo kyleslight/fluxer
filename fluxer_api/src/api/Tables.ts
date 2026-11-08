@@ -160,6 +160,8 @@ import {
 	GUILD_COLUMNS,
 	GUILD_EMOJI_BY_EMOJI_ID_COLUMNS,
 	GUILD_EMOJI_COLUMNS,
+	GUILD_EVENT_COLUMNS,
+	GUILD_EVENTS_BY_GUILD_COLUMNS,
 	GUILD_MEMBER_BY_USER_ID_COLUMNS,
 	GUILD_MEMBER_COLUMNS,
 	GUILD_MEMBERSHIP_METADATA_COLUMNS,
@@ -171,6 +173,8 @@ import {
 	type GuildBanByUserIdRow,
 	type GuildBanRow,
 	type GuildEmojiRow,
+	type GuildEventByGuildRow,
+	type GuildEventRow,
 	type GuildMemberByUserIdRow,
 	type GuildMemberRow,
 	type GuildMembershipMetadataRow,
@@ -584,6 +588,16 @@ export const GuildStickersByStickerId = defineTable<GuildStickerRow, 'sticker_id
 	name: 'guild_stickers_by_sticker_id',
 	columns: GUILD_STICKER_BY_STICKER_ID_COLUMNS,
 	primaryKey: ['sticker_id'],
+});
+export const GuildEvents = defineTable<GuildEventRow, 'event_id'>({
+	name: 'guild_events',
+	columns: GUILD_EVENT_COLUMNS,
+	primaryKey: ['event_id'],
+});
+export const GuildEventsByGuild = defineTable<GuildEventByGuildRow, 'guild_id' | 'event_id'>({
+	name: 'guild_events_by_guild',
+	columns: GUILD_EVENTS_BY_GUILD_COLUMNS,
+	primaryKey: ['guild_id', 'event_id'],
 });
 export const GuildRoles = defineTable<GuildRoleRow, 'guild_id' | 'role_id'>({
 	name: 'guild_roles',

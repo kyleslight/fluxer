@@ -26,10 +26,12 @@ import {
 } from '@app/api/guild/GuildAuditLogEntryMapper';
 import type {GuildAuditLogService} from '@app/api/guild/GuildAuditLogService';
 import {withGuildUpdateLock} from '@app/api/guild/GuildUpdateLock';
+import {GuildEventRepository} from '@app/api/guild/repositories/GuildEventRepository';
 import type {GuildRepository} from '@app/api/guild/repositories/GuildRepository';
 import {GuildChannelService} from '@app/api/guild/services/GuildChannelService';
 import {GuildContentService} from '@app/api/guild/services/GuildContentService';
 import {GuildDataService} from '@app/api/guild/services/GuildDataService';
+import {GuildEventService} from '@app/api/guild/services/GuildEventService';
 import {GuildMemberService} from '@app/api/guild/services/GuildMemberService';
 import {getGuildAuth} from '@app/api/guild/services/GuildMfaEnforcement';
 import {GuildModerationService} from '@app/api/guild/services/GuildModerationService';
@@ -90,6 +92,7 @@ export class GuildService {
 	public readonly content: GuildContentService;
 	public readonly channels: GuildChannelService;
 	public readonly search: GuildSearchService;
+	public readonly events: GuildEventService;
 	private readonly guildRepository: GuildRepository;
 	private readonly cacheService: ICacheService;
 	private readonly userCacheService: UserCacheService;
@@ -199,6 +202,7 @@ export class GuildService {
 			userRepository,
 			workerService,
 		);
+		this.events = new GuildEventService(new GuildEventRepository(), gatewayService, snowflakeService);
 	}
 
 	async updateGuild(

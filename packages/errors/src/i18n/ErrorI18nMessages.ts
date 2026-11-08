@@ -791,6 +791,10 @@ export const ERROR_I18N_MESSAGES = {
 	'entrance_sounds.name_length_invalid': 'Entrance sound names must be between 1 and {max, number} characters.',
 	'entrance_sounds.not_found': 'Entrance sound not found.',
 	'entrance_sounds.invalid_scope': 'Invalid entrance sound scope.',
+	'channels_and_guilds.max_events_reached':
+		"You can't have more than {count, plural, one {# scheduled event} other {# scheduled events}}.",
+	'channels_and_guilds.unknown_event': 'Unknown scheduled event.',
+	'channels_and_guilds.scheduled_end_before_start': 'The event must end after it starts.',
 } as const;
 
 export type ErrorI18nCatalog = typeof ERROR_I18N_MESSAGES;

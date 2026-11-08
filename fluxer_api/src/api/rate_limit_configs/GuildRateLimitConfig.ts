@@ -108,6 +108,22 @@ export const GuildRateLimitConfigs = {
 		bucket: 'guild:emojis:list::guild_id',
 		config: {limit: 60, windowMs: ms('10 seconds')},
 	} as RouteRateLimitConfig,
+	GUILD_EVENT_LIST: {
+		bucket: 'guild:event:list::guild_id',
+		config: {limit: 100, windowMs: ms('10 seconds')},
+	} as RouteRateLimitConfig,
+	GUILD_EVENT_CREATE: {
+		bucket: 'guild:event:create::guild_id',
+		config: {limit: 10, windowMs: ms('30 seconds')},
+	} as RouteRateLimitConfig,
+	GUILD_EVENT_UPDATE: {
+		bucket: 'guild:event:update::guild_id',
+		config: {limit: 20, windowMs: ms('30 seconds')},
+	} as RouteRateLimitConfig,
+	GUILD_EVENT_DELETE: {
+		bucket: 'guild:event:delete::guild_id',
+		config: {limit: 10, windowMs: ms('30 seconds')},
+	} as RouteRateLimitConfig,
 	GUILD_EMOJI_CREATE: {
 		bucket: 'guild:emoji:create::guild_id',
 		config: {limit: 10, windowMs: ms('30 seconds')},

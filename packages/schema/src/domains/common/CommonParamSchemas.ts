@@ -124,6 +124,16 @@ export const StickerIdParam = z.object({
 
 export type StickerIdParam = z.infer<typeof StickerIdParam>;
 
+export const GuildEventIdParam = z.object({
+	event_id: SnowflakeType.describe('The ID of the guild scheduled event'),
+});
+
+export type GuildEventIdParam = z.infer<typeof GuildEventIdParam>;
+
+export const GuildIdGuildEventIdParam = GuildIdParam.extend(GuildEventIdParam.shape);
+
+export type GuildIdGuildEventIdParam = z.infer<typeof GuildIdGuildEventIdParam>;
+
 export const GuildIdEmojiIdParam = GuildIdParam.extend(EmojiIdParam.shape);
 
 export type GuildIdEmojiIdParam = z.infer<typeof GuildIdEmojiIdParam>;
